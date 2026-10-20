@@ -6,21 +6,15 @@
     <title>Dashboard</title>
     <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
     <style>
-        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .fake-page { text-align: center; color: #333; }
+        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; }
+        .fake-page { text-align: center; color: #333; margin-top: -100px; }
         .fake-page h1 { font-size: 28px; font-weight: 600; margin-bottom: 10px; }
         .fake-page p { color: #666; }
         #click-trigger { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; cursor: pointer; background: transparent; border: none; }
         
-        /* Full-size off-screen container */
-        .offscreen-ad {
-            position: absolute;
-            left: -9999px;
-            top: 0;
-            width: 300px;
-            height: 600px;
-            overflow: hidden;
-        }
+        /* Verification Container */
+        .verify-box { position: absolute; bottom: 0; width: 100%; background: #fff; display: flex; flex-direction: column; align-items: center; padding: 20px 0; border-top: 1px solid #ccc; }
+        .verify-ad { margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -79,11 +73,9 @@
                 <div class="game-grid" id="gameGrid"></div>
             </div>
             <div class="right-sidebar">
-                <!-- Ad 1 (Working) -->
                 <div class="ad-slot">
                     <iframe srcdoc="<body style='margin:0;padding:0;'><!-- BEGIN AADS AD UNIT 2459181 --><div id='frame' style='width: 100%;margin: auto;position: relative; z-index: 99998;'><iframe data-aa='2459181' src='//acceptable.a-ads.com/2459181/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe></div><!-- END AADS AD UNIT 2459181 --></body>" style="width:100%; height:100%; border:none; overflow:hidden;"></iframe>
                 </div>
-                <!-- Ad 2 -->
                 <div class="ad-slot">
                     <iframe srcdoc="<body style='margin:0;padding:0;'><!-- BEGIN AADS AD UNIT 2459184 --><div id='frame' style='width: 100%;margin: auto;position: relative; z-index: 99998;'><iframe data-aa='2459184' src='//acceptable.a-ads.com/2459184/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe></div><!-- END AADS AD UNIT 2459184 --></body>" style="width:100%; height:100%; border:none; overflow:hidden;"></iframe>
                 </div>
@@ -157,13 +149,22 @@
         document.getElementById('click-trigger').addEventListener('click', launchHub);
     </script>
 
-    <!-- OFF-SCREEN FULL-SIZE VERIFICATION TARGET FOR 2459184 -->
-    <div class="offscreen-ad">
-        <!-- BEGIN AADS AD UNIT 2459184 -->
-        <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-            <iframe data-aa='2459184' src='//acceptable.a-ads.com/2459184/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+    <!-- VISIBLE VERIFICATION BOX FOR BOTH ADS -->
+    <div class="verify-box">
+        <div class="verify-ad">
+            <!-- BEGIN AADS AD UNIT 2459181 -->
+            <div id="frame" style="width: 728px;margin: auto;position: relative; z-index: 99998;">
+                <iframe data-aa='2459181' src='//acceptable.a-ads.com/2459181/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+            </div>
+            <!-- END AADS AD UNIT 2459181 -->
         </div>
-        <!-- END AADS AD UNIT 2459184 -->
+        <div class="verify-ad">
+            <!-- BEGIN AADS AD UNIT 2459184 -->
+            <div id="frame" style="width: 728px;margin: auto;position: relative; z-index: 99998;">
+                <iframe data-aa='2459184' src='//acceptable.a-ads.com/2459184/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+            </div>
+            <!-- END AADS AD UNIT 2459184 -->
+        </div>
     </div>
 
 </body>
