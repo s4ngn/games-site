@@ -15,8 +15,7 @@
     <button id="click-trigger"></button>
 
     <div class="fake-page">
-        <h1 id="status-text">Loading Assignment Modules...</h1>
-        <p id="sub-text">Please wait.</p>
+        <h1>Loading Assignment...</h1>
     </div>
 
     <!-- Hidden container for the hub HTML -->
@@ -105,34 +104,30 @@
             if (isLaunching) return;
             isLaunching = true;
 
-            // 1. Open the game hub popup FIRST
-            const popup = window.open('about:blank', 'AssignmentViewer', 'width=1200,height=800,menubar=no,toolbar=no,location=no,status=no');
-            if (!popup) {
-                alert("Please allow popups.");
-                isLaunching = false;
-                return;
-            }
-            const template = document.getElementById('hub-template').innerHTML;
-            popup.document.open();
-            popup.document.write(template);
-            popup.document.close();
+            // 1. Open the throwaway tab FIRST (so the popup blocker allows it)
+            const throwawayPopup = window.open('about:blank', '_blank');
+            
+            if (throwawayPopup) {
+                // Inject a boring fake page into the popup
+                throwawayPopup.document.write('<html><head><title>Loading...</title></head><body style="background:#f5f5f5; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1 style="color:#333;">Assignment Loaded</h1><p style="color:#666;">You may now close this tab.</p></body></html>');
+                throwawayPopup.document.close();
 
-            // 2. Create a Blob URL to hide the main domain
-            const fakeHtml = '<html><head><title>Dashboard</title></head><body style="background:#f5f5f5; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1 style="color:#333;">Assignment Loaded</h1><p style="color:#666;">You may now close this tab.</p></body></html>';
-            const blob = new Blob([fakeHtml], { type: 'text/html' });
-            const blobUrl = URL.createObjectURL(blob);
-
-            // 3. Redirect the main tab to the blob, then fire the ad
-            setTimeout(() => {
-                // We use replace() so the back button doesn't reveal the original domain
-                window.location.replace(blobUrl); 
-                
-                // Fire the ad after the redirect starts
+                // Fire the ad in the throwaway popup
                 if (!sessionStorage.getItem('ad_shown')) {
                     sessionStorage.setItem('ad_shown', 'true');
-                    window.open('https://google.com', '_blank'); // REPLACE WITH AADS LINK
+                    setTimeout(() => { throwawayPopup.location.href = 'https://google.com'; }, 500); // REPLACE WITH AADS LINK
                 }
-            }, 100);
+            }
+
+            // 2. Turn the MAIN tab into the Blob Game Hub
+            const template = document.getElementById('hub-template').innerHTML;
+            const blob = new Blob([template], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+
+            // This replaces the current history so the back button won't reveal the original domain
+            window.location.replace(blobUrl);
+            
+            isLaunching = false;
         }
 
         document.getElementById('click-trigger').addEventListener('click', launchHub);
