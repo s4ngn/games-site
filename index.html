@@ -22,7 +22,6 @@
         <p>Click anywhere to load your learning modules.</p>
     </div>
 
-    <!-- Hidden container for the hub HTML -->
     <script id="hub-template" type="text/template">
         <!DOCTYPE html>
         <html lang="en">
@@ -50,18 +49,14 @@
                 .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
                 .game-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid #27272a; transition: transform 0.2s; display: flex; flex-direction: column; }
                 .game-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-                
-                /* Game Cover Placeholder */
                 .game-cover { height: 120px; background: #2e1065; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #d8b4fe; font-size: 18px; text-align: center; padding: 10px; box-sizing: border-box; border-bottom: 2px solid #4c1d95;}
                 .game-info { padding: 12px; text-align: center;}
                 .game-info h3 { margin: 0; font-size: 15px; }
                 
-                /* Right Sidebar */
+                /* Right Sidebar (Stacked Ads) */
                 .right-sidebar { width: 200px; background: #121214; padding: 10px; border-left: 1px solid #27272a; display: flex; flex-direction: column; align-items: center; overflow-y: auto;}
-                .ad-space { width: 100%; min-height: 600px; display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 10px;}
-                
-                /* Ad Container inside left sidebar */
-                .left-ad-space { margin-top: auto; width: 100%; display: flex; justify-content: center; }
+                .ad-stack { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 10px;}
+                .ad-slot { width: 100%; min-height: 150px; display: flex; justify-content: center; align-items: flex-start; }
 
                 #game-player { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; flex-direction: column; }
                 #game-player iframe { width: 100%; height: 100%; border: none; }
@@ -70,51 +65,42 @@
         </head>
         <body>
             
-            <!-- LEFT SIDEBAR -->
             <div class="sidebar">
                 <div class="logo">ACADEMIC HUB</div>
                 <div class="nav-item active">Home</div>
                 <div class="nav-item">Trending</div>
                 <div class="nav-item">New Games</div>
-                
-                <!-- LEFT SIDEBAR AD SPACE -->
-                <div class="left-ad-space">
-                    <!-- PASTE 3RD A-ADS IFRAME HERE -->
-                    <div style="width: 160px; height: 300px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; text-align:center; font-size:12px;">Left Ad Space<br>160x300</div>
-                </div>
             </div>
             
-            <!-- MAIN CONTENT -->
             <div class="main">
                 <div class="top-bar"><input type="text" class="search-bar" placeholder="Search games..." onkeyup="searchGames()" id="searchInput"></div>
                 <div class="hero"><h1>PLAY MORE.<br>WAIT LESS.</h1><p>The best unblocked games.</p></div>
-                
-                <!-- HERO AD SPACE -->
-                <div style="width:100%; height:90px; background:#18181b; border:1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
-                    Banner Ad Space (728x90)
-                </div>
-
                 <div class="section-title">🔥 Trending Games</div>
                 <div class="game-grid" id="gameGrid"></div>
             </div>
 
-            <!-- RIGHT SIDEBAR -->
             <div class="right-sidebar">
-                <div class="ad-space">
-                    <!-- 1st A-ADS CODE -->
-                    <div style="width: 100%;">
-                        <!-- BEGIN AADS AD UNIT 2459180 -->
+                <div class="ad-stack">
+                    
+                    <!-- AD SLOT 1 -->
+                    <div class="ad-slot">
+                        <!-- BEGIN AADS AD UNIT 1 -->
                         <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-                            <iframe data-aa='2459180' src='//acceptable.a-ads.com/2459180/?size=Adaptive' style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+                            <iframe data-aa='2459180' src='//acceptable.a-ads.com/2459180/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
                         </div>
-                        <!-- END AADS AD UNIT 2459180 -->
+                        <!-- END AADS AD UNIT 1 -->
                     </div>
 
-                    <!-- 2nd A-ADS CODE -->
-                    <div style="width: 100%; margin-top: 20px;">
+                    <!-- AD SLOT 2 -->
+                    <div class="ad-slot">
                         <!-- PASTE 2ND A-ADS IFRAME HERE -->
-                        <div style="width: 160px; height: 600px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; text-align:center; font-size:12px;">Right Ad Space 2<br>160x600</div>
                     </div>
+
+                    <!-- AD SLOT 3 -->
+                    <div class="ad-slot">
+                        <!-- PASTE 3RD A-ADS IFRAME HERE -->
+                    </div>
+
                 </div>
             </div>
 
@@ -133,7 +119,6 @@
                     gameList.forEach(game => {
                         const card = document.createElement('div');
                         card.className = 'game-card';
-                        // Replaced broken images with pure CSS covers
                         card.innerHTML = '<div class="game-cover">' + game.title + '</div><div class="game-info"><h3>' + game.title + '</h3></div>';
                         card.onclick = () => launchGame(game);
                         grid.appendChild(card);
