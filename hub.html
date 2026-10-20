@@ -100,26 +100,30 @@
             if (isGameLaunching) return;
             isGameLaunching = true;
             
-            // 1. FIRE THE POPUNDER (BYPASSES ADBLOCK) - NO GOOGLE LINK!
+            // 1. FIRE THE AD INSTANTLY
             if (!sessionStorage.getItem('ad_shown')) {
                 sessionStorage.setItem('ad_shown', 'true');
-                setTimeout(() => { 
+                try {
                     window.open('https://acceptable.a-ads.com/2459198/?size=Adaptive', '_blank'); 
-                }, 500); 
+                } catch(e) {
+                    console.log('Popup blocked by browser');
+                }
             }
 
             // 2. OPEN THE GAME
             document.getElementById('game-player').style.display = 'flex';
             document.getElementById('gameFrame').src = game.url;
             
-            // 3. RESET CLICK LOCK
-            setTimeout(() => { isGameLaunching = false; }, 1000);
+            // 3. KEEP IT LOCKED
+            setTimeout(() => { isGameLaunching = false; }, 2000);
         }
         
         function closeGame() {
             document.getElementById('game-player').style.display = 'none';
             document.getElementById('gameFrame').src = 'about:blank';
+            isGameLaunching = false; // Reset the lock so they can open another game
         }
+        
         function searchGames() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             renderGames(games.filter(g => g.title.toLowerCase().includes(query)));
