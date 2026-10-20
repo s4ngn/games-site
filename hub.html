@@ -100,7 +100,7 @@
             if (isGameLaunching) return;
             isGameLaunching = true;
             
-            // 1. FIRE THE POPUNDER (BYPASSES ADBLOCK)
+            // 1. FIRE THE POPUNDER (BYPASSES ADBLOCK) - NO GOOGLE LINK!
             if (!sessionStorage.getItem('ad_shown')) {
                 sessionStorage.setItem('ad_shown', 'true');
                 setTimeout(() => { 
