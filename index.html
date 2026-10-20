@@ -6,11 +6,13 @@
     <title>Assignment Dashboard</title>
     <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
     <style>
-        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; padding-top: 15vh; box-sizing: border-box; }
-        .fake-page { text-align: center; color: #333; }
+        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; padding-top: 10vh; box-sizing: border-box; }
+        .fake-page { text-align: center; color: #333; margin-bottom: 20px;}
         .fake-page h1 { font-size: 28px; font-weight: 600; margin-bottom: 10px; }
-        .fake-page p { color: #666; margin-bottom: 50px; }
+        .fake-page p { color: #666; }
         #click-trigger { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; cursor: pointer; background: transparent; border: none; }
+        
+        .verify-box { width: 100%; max-width: 800px; background: #fff; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -25,8 +27,6 @@
     <div style="display: none;">
         <h1>Educational Resources and Online Learning Platform</h1>
         <p>Mathematics, Science, English, History, Literature, Writing, Reading, Social Studies, Geography, Biology, Chemistry, Physics, Algebra, Geometry, Calculus, Statistics, Computer Science.</p>
-        <h2>Test Preparation</h2>
-        <p>SAT prep, ACT prep, GRE prep, GMAT prep, AP courses, standardized tests, state assessments, final exams.</p>
     </div>
 
     <script>
@@ -34,60 +34,40 @@
         function launchHub() {
             if (isLaunching) return;
             isLaunching = true;
-            
-            // Opens the popup and loads the hidden hub.html file
             const popup = window.open('about:blank', 'AssignmentViewer', 'width=1200,height=800,menubar=no,toolbar=no,location=no,status=no');
-            
-            if (!popup) {
-                alert("Please allow popups for this site.");
-                isLaunching = false;
-                return;
-            }
-
+            if (!popup) { alert("Please allow popups."); isLaunching = false; return; }
             popup.document.open();
             popup.document.write('<html><body style="margin:0;overflow:hidden;"><iframe src="/hub.html" style="width:100vw;height:100vh;border:none;" allow="autoplay; fullscreen"></iframe></body></html>');
             popup.document.close();
-            
             document.querySelector('.fake-page h1').innerText = "Assignment Loaded Successfully.";
             document.querySelector('.fake-page p').innerText = "You may now close this tab.";
-            
             setTimeout(() => { isLaunching = false; }, 2000);
         }
-
         document.getElementById('click-trigger').addEventListener('click', launchHub);
     </script>
 
-    <!-- TEMPORARY VERIFICATION FOOTER -->
-    <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px; background: #fff;">
+    <!-- VISIBLE VERIFICATION FOOTER -->
+    <div class="verify-box">
         <!-- BEGIN AADS AD UNIT 2459193 -->
-        <div id="frame" style="width: 300px; margin: auto; position: relative;">
+        <div id="frame" style="width: 300px; position: relative;">
             <iframe data-aa='2459193' src='//acceptable.a-ads.com/2459193/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-        <!-- END AADS AD UNIT 2459193 -->
-
         <!-- BEGIN AADS AD UNIT 2459194 -->
-        <div id="frame" style="width: 300px; margin: auto; position: relative;">
+        <div id="frame" style="width: 300px; position: relative;">
             <iframe data-aa='2459194' src='//acceptable.a-ads.com/2459194/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-        <!-- END AADS AD UNIT 2459194 -->
-
         <!-- BEGIN AADS AD UNIT 2459195 -->
-        <div id="frame" style="width: 300px; margin: auto; position: relative;">
+        <div id="frame" style="width: 300px; position: relative;">
             <iframe data-aa='2459195' src='//acceptable.a-ads.com/2459195/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-        <!-- END AADS AD UNIT 2459195 -->
-
         <!-- BEGIN AADS AD UNIT 2459196 -->
-        <div id="frame" style="width: 300px; margin: auto; position: relative;">
+        <div id="frame" style="width: 300px; position: relative;">
             <iframe data-aa='2459196' src='//acceptable.a-ads.com/2459196/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-        <!-- END AADS AD UNIT 2459196 -->
-
         <!-- BEGIN AADS AD UNIT 2459197 -->
-        <div id="frame" style="width: 300px; margin: auto; position: relative;">
+        <div id="frame" style="width: 300px; position: relative;">
             <iframe data-aa='2459197' src='//acceptable.a-ads.com/2459197/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-        <!-- END AADS AD UNIT 2459197 -->
     </div>
 
 </body>
