@@ -83,6 +83,7 @@
             { id: 3, title: "1v1.lol", url: "https://www.gamesforfree.com/embed/1v1-lol" },
             { id: 4, title: "OvO", url: "https://www.gamesforfree.com/embed/ovo" }
         ];
+        
         function renderGames(gameList) {
             const grid = document.getElementById('gameGrid');
             grid.innerHTML = '';
@@ -96,38 +97,29 @@
         }
         
         let isGameLaunching = false;
+        
         function launchGame(game) {
             if (isGameLaunching) return;
             isGameLaunching = true;
             
-            // 1. FIRE THE AD INSTANTLY
-            if (!sessionStorage.getItem('ad_shown')) {
-                sessionStorage.setItem('ad_shown', 'true');
-                try {
-                    window.open('https://acceptable.a-ads.com/2459198/?size=Adaptive', '_blank'); 
-                } catch(e) {
-                    console.log('Popup blocked by browser');
-                }
-            }
-
-            // 2. OPEN THE GAME
+            // NO AD POPUP. NO NEW TABS. JUST THE GAME.
             document.getElementById('game-player').style.display = 'flex';
             document.getElementById('gameFrame').src = game.url;
             
-            // 3. KEEP IT LOCKED
             setTimeout(() => { isGameLaunching = false; }, 2000);
         }
         
         function closeGame() {
             document.getElementById('game-player').style.display = 'none';
             document.getElementById('gameFrame').src = 'about:blank';
-            isGameLaunching = false; // Reset the lock so they can open another game
+            isGameLaunching = false; 
         }
         
         function searchGames() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             renderGames(games.filter(g => g.title.toLowerCase().includes(query)));
         }
+        
         renderGames(games);
     </script>
 </body>
