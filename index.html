@@ -33,7 +33,7 @@
                 body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; height: 100vh; overflow: hidden; }
                 
                 /* Left Sidebar */
-                .sidebar { width: 220px; background: #121214; padding: 20px; border-right: 1px solid #27272a; display: flex; flex-direction: column; gap: 10px; }
+                .sidebar { width: 220px; background: #121214; padding: 20px; border-right: 1px solid #27272a; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
                 .logo { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary); }
                 .nav-item { color: #a1a1aa; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; }
                 .nav-item.active { background: #27272a; color: #fff; border-left: 3px solid var(--primary); }
@@ -49,14 +49,26 @@
                 .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
                 .game-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid #27272a; transition: transform 0.2s; display: flex; flex-direction: column; }
                 .game-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+                
+                /* Game Cover Placeholder */
                 .game-cover { height: 120px; background: #2e1065; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #d8b4fe; font-size: 18px; text-align: center; padding: 10px; box-sizing: border-box; border-bottom: 2px solid #4c1d95;}
                 .game-info { padding: 12px; text-align: center;}
                 .game-info h3 { margin: 0; font-size: 15px; }
                 
-                /* Right Sidebar (Stacked Ads) */
-                .right-sidebar { width: 200px; background: #121214; padding: 10px; border-left: 1px solid #27272a; display: flex; flex-direction: column; align-items: center; overflow-y: auto;}
-                .ad-stack { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 10px;}
-                .ad-slot { width: 100%; min-height: 150px; display: flex; justify-content: center; align-items: flex-start; }
+                /* Right Sidebar - Stacked Ads */
+                .right-sidebar { 
+                    width: 200px; 
+                    background: #121214; 
+                    padding: 10px; 
+                    border-left: 1px solid #27272a; 
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    gap: 20px; 
+                    overflow-y: auto;
+                    flex-shrink: 0;
+                }
+                .ad-slot { width: 100%; display: flex; justify-content: center; align-items: flex-start; }
 
                 #game-player { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; flex-direction: column; }
                 #game-player iframe { width: 100%; height: 100%; border: none; }
@@ -65,6 +77,7 @@
         </head>
         <body>
             
+            <!-- LEFT SIDEBAR -->
             <div class="sidebar">
                 <div class="logo">ACADEMIC HUB</div>
                 <div class="nav-item active">Home</div>
@@ -72,6 +85,7 @@
                 <div class="nav-item">New Games</div>
             </div>
             
+            <!-- MAIN CONTENT -->
             <div class="main">
                 <div class="top-bar"><input type="text" class="search-bar" placeholder="Search games..." onkeyup="searchGames()" id="searchInput"></div>
                 <div class="hero"><h1>PLAY MORE.<br>WAIT LESS.</h1><p>The best unblocked games.</p></div>
@@ -79,30 +93,30 @@
                 <div class="game-grid" id="gameGrid"></div>
             </div>
 
-            <!-- RIGHT SIDEBAR (ONLY ADS HERE) -->
+            <!-- RIGHT SIDEBAR (STACKED ADS) -->
             <div class="right-sidebar">
-                <div class="ad-stack">
-                    
-                    <!-- AD SLOT 1 -->
-                    <div class="ad-slot">
-                        <!-- BEGIN AADS AD UNIT 1 (YOUR EXISTING CODE) -->
-                        <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-                            <iframe data-aa='2459180' src='//acceptable.a-ads.com/2459180/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
-                        </div>
-                        <!-- END AADS AD UNIT 1 -->
+                
+                <!-- AD SLOT 1 -->
+                <div class="ad-slot">
+                    <!-- BEGIN AADS AD UNIT 2459180 -->
+                    <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+                        <iframe data-aa='2459180' src='//acceptable.a-ads.com/2459180/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
                     </div>
-
-                    <!-- AD SLOT 2 -->
-                    <div class="ad-slot">
-                        <!-- PASTE 2ND A-ADS IFRAME HERE -->
-                    </div>
-
-                    <!-- AD SLOT 3 -->
-                    <div class="ad-slot">
-                        <!-- PASTE 3RD A-ADS IFRAME HERE -->
-                    </div>
-
+                    <!-- END AADS AD UNIT 2459180 -->
                 </div>
+
+                <!-- AD SLOT 2 -->
+                <div class="ad-slot">
+                    <!-- PASTE 2ND A-ADS IFRAME HERE -->
+                    <div style="width: 100%; height: 160px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; font-size:12px;">Ad Slot 2</div>
+                </div>
+
+                <!-- AD SLOT 3 -->
+                <div class="ad-slot">
+                    <!-- PASTE 3RD A-ADS IFRAME HERE -->
+                    <div style="width: 100%; height: 160px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; font-size:12px;">Ad Slot 3</div>
+                </div>
+
             </div>
 
             <div id="game-player"><button class="close-btn" onclick="closeGame()">Exit to Hub</button><iframe id="gameFrame" src="about:blank"></iframe></div>
