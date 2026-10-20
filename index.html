@@ -6,11 +6,14 @@
     <title>Dashboard</title>
     <link rel="icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
     <style>
-        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .fake-page { text-align: center; color: #333; }
+        body { margin: 0; background: #f5f5f5; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; }
+        .fake-page { text-align: center; color: #333; margin-top: -100px; }
         .fake-page h1 { font-size: 28px; font-weight: 600; margin-bottom: 10px; }
         .fake-page p { color: #666; }
         #click-trigger { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; cursor: pointer; background: transparent; border: none; }
+        
+        /* Visible Ad Footer for Verification */
+        .verification-footer { position: absolute; bottom: 0; width: 100%; background: #e0e0e0; display: flex; justify-content: center; padding: 10px 0; }
     </style>
 </head>
 <body>
@@ -32,13 +35,11 @@
                 :root { --primary: #a855f7; --bg: #09090b; --card-bg: #18181b; --text: #f4f4f5; }
                 body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; height: 100vh; overflow: hidden; }
                 
-                /* Left Sidebar */
                 .sidebar { width: 220px; background: #121214; padding: 20px; border-right: 1px solid #27272a; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
                 .logo { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; margin-bottom: 20px; text-shadow: 0 0 10px var(--primary); }
                 .nav-item { color: #a1a1aa; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; }
                 .nav-item.active { background: #27272a; color: #fff; border-left: 3px solid var(--primary); }
                 
-                /* Main Content */
                 .main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 0 20px 20px; }
                 .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #27272a; margin-bottom: 20px; }
                 .search-bar { background: #18181b; border: 1px solid #3f3f46; padding: 10px 15px; border-radius: 8px; color: #fff; width: 100%; max-width: 400px; outline: none; }
@@ -49,25 +50,11 @@
                 .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
                 .game-card { background: var(--card-bg); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid #27272a; transition: transform 0.2s; display: flex; flex-direction: column; }
                 .game-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-                
-                /* Game Cover Placeholder */
                 .game-cover { height: 120px; background: #2e1065; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #d8b4fe; font-size: 18px; text-align: center; padding: 10px; box-sizing: border-box; border-bottom: 2px solid #4c1d95;}
                 .game-info { padding: 12px; text-align: center;}
                 .game-info h3 { margin: 0; font-size: 15px; }
                 
-                /* Right Sidebar - Stacked Ads */
-                .right-sidebar { 
-                    width: 200px; 
-                    background: #121214; 
-                    padding: 10px; 
-                    border-left: 1px solid #27272a; 
-                    display: flex; 
-                    flex-direction: column; 
-                    align-items: center; 
-                    gap: 15px; 
-                    overflow-y: auto;
-                    flex-shrink: 0;
-                }
+                .right-sidebar { width: 200px; background: #121214; padding: 10px; border-left: 1px solid #27272a; display: flex; flex-direction: column; align-items: center; gap: 15px; overflow-y: auto; flex-shrink: 0; }
                 .ad-slot { width: 100%; min-height: 160px; display: flex; justify-content: center; align-items: flex-start; }
 
                 #game-player { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1000; flex-direction: column; }
@@ -76,8 +63,6 @@
             </style>
         </head>
         <body>
-            
-            <!-- LEFT SIDEBAR -->
             <div class="sidebar">
                 <div class="logo">ACADEMIC HUB</div>
                 <div class="nav-item active">Home</div>
@@ -85,7 +70,6 @@
                 <div class="nav-item">New Games</div>
             </div>
             
-            <!-- MAIN CONTENT -->
             <div class="main">
                 <div class="top-bar"><input type="text" class="search-bar" placeholder="Search games..." onkeyup="searchGames()" id="searchInput"></div>
                 <div class="hero"><h1>PLAY MORE.<br>WAIT LESS.</h1><p>The best unblocked games.</p></div>
@@ -93,10 +77,7 @@
                 <div class="game-grid" id="gameGrid"></div>
             </div>
 
-            <!-- RIGHT SIDEBAR (STACKED ADS) -->
             <div class="right-sidebar">
-                
-                <!-- AD SLOT 1 -->
                 <div class="ad-slot">
                     <!-- BEGIN AADS AD UNIT 2459181 -->
                     <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
@@ -104,25 +85,6 @@
                     </div>
                     <!-- END AADS AD UNIT 2459181 -->
                 </div>
-
-                <!-- AD SLOT 2 -->
-                <div class="ad-slot">
-                    <!-- PASTE AD UNIT 2 CODE HERE -->
-                    <div style="width: 100%; height: 160px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; font-size:12px;">Ad Slot 2</div>
-                </div>
-
-                <!-- AD SLOT 3 -->
-                <div class="ad-slot">
-                    <!-- PASTE AD UNIT 3 CODE HERE -->
-                    <div style="width: 100%; height: 160px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; font-size:12px;">Ad Slot 3</div>
-                </div>
-
-                <!-- AD SLOT 4 -->
-                <div class="ad-slot">
-                    <!-- PASTE AD UNIT 4 CODE HERE -->
-                    <div style="width: 100%; height: 160px; border: 1px dashed #333; color:#555; display:flex; justify-content:center; align-items:center; font-size:12px;">Ad Slot 4</div>
-                </div>
-
             </div>
 
             <div id="game-player"><button class="close-btn" onclick="closeGame()">Exit to Hub</button><iframe id="gameFrame" src="about:blank"></iframe></div>
@@ -151,7 +113,7 @@
                     isGameLaunching = true;
                     if (!sessionStorage.getItem('ad_shown')) {
                         sessionStorage.setItem('ad_shown', 'true');
-                        setTimeout(() => { window.open('https://google.com', '_blank'); }, 500); // REPLACE WITH AADS POPUNDER LINK
+                        setTimeout(() => { window.open('https://google.com', '_blank'); }, 500);
                     }
                     document.getElementById('game-player').style.display = 'flex';
                     document.getElementById('gameFrame').src = game.url;
@@ -201,10 +163,10 @@
         document.getElementById('click-trigger').addEventListener('click', launchHub);
     </script>
 
-    <!-- A-ADS VERIFICATION TARGET (OFF-SCREEN CLOAK) - MOVED INSIDE BODY -->
-    <div style="position: absolute; top: 0; left: -9999px; width: 300px; height: 600px; z-index: -999;">
+    <!-- VISIBLE FOOTER FOR A-ADS VERIFICATION -->
+    <div class="verification-footer">
         <!-- BEGIN AADS AD UNIT 2459181 -->
-        <div id="frame" style="width: 100%;margin: auto;position: relative;">
+        <div id="frame" style="width: 728px;margin: auto;position: relative; z-index: 99998;">
             <iframe data-aa='2459181' src='//acceptable.a-ads.com/2459181/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
         <!-- END AADS AD UNIT 2459181 -->
